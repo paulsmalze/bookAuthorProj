@@ -14,5 +14,18 @@ def create_book(request):
     return redirect('/books')
 
 def create_author(request):
-    Book.objects.create(title=request.POST['first_name'],description=request.POST['last_name'],notes=request.POST['notes'])
+    Author.objects.create(first_name=request.POST['first_name'],last_name=request.POST['last_name'],notes=request.POST['notes'])
     return redirect('/authors')
+
+def show_book(request):
+    context = {
+        "book": book,
+        #"authors": Author.objects.exclude(books__id=book_id)
+    }
+    return render(request, 'book.html',context)
+
+def show_author(request):
+    context = {
+        "author": author,
+    }
+    return render(request, 'author.html',context)
